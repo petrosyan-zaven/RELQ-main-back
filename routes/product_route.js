@@ -11,7 +11,7 @@ function product_route(app) {
     app.post('/addproduct', multerMid.single('image'), product_controller.createProduct );
     app.put('/updateproducy/:id', multerMid.single('image'), product_controller.updateProduct);
     app.put('/downloade/:id', userAuthenticate, product_controller.downloadCount)
-    app.delete('/deleteproduct/id',adminAuthenticate, product_controller.deleteProduct);
+    app.delete('/deleteproduct/:id',adminAuthenticate, product_controller.deleteProduct);
 
 }
 

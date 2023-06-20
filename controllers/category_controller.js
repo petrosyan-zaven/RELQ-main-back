@@ -26,7 +26,7 @@ function categoryById(req,res){
 async function createCategory(req, res) {
     try {
       const { categoryName } = req.body;
-      const category = await Category.create({ name: categoryName });
+      const category = await Category.create({ categoryName });
   
       return res.status(201).json({ message: 'Category created', data: category });
     } catch (error) {
@@ -36,18 +36,33 @@ async function createCategory(req, res) {
   }
   
 
- async function deleteCategory(req, res) {
-    const { id } = req.params;
-  
-    try {
-      await Category.destroy({ where: { id } });
-      res.json({ response: "User deleted" });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+  function updateCategory(req, res) {
+    const { categoryName } = req.body
+ 
+    const { id } = req.params
+    Category.update({  categoryName }, {where:{ id: id }})
+    .then((cat) => {
+        res.status(201).json({cat: "Updated"})
+    }).catch((err) => {
+        res.status(500).json({error:err.message})
+    })
   }
 
+  
+async function deleteCategory(req, res) {
+  const { id } = req.params;
+
+  try {
+    await Category.destroy({ where: { id } });
+    res.json({ response: "Category deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 
-module.exports = { allCategory, categoryById, createCategory, deleteCategory }
+
+
+
+module.exports = { allCategory, categoryById, createCategory, deleteCategory, updateCategory }
 

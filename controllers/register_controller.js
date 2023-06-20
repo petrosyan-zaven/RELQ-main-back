@@ -14,7 +14,7 @@ async function register(req, res) {
   const  firstName  = req.body.firstName;
   const imageName = req.file?.filename;
   console.log(req,"giui");
-  console.log(req.file.filename,"name",req.file, "file");
+  // console.log(req.file.filename,"name",req.file, "file");
   const image = imageName ? `${req.protocol}://${req.hostname}:${process.env.PORT}/images/${imageName}` : null;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const passwordRegex = /^(?=.*[a-zA-Z0-9]).{6,}$/;

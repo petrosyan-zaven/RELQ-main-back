@@ -6,9 +6,10 @@ function category_route(app) {
     
 
     app.get('/categories', category_controller.allCategory);
-    app.get('/category:id', category_controller.categoryById);
-    app.post('/addcat', adminAuthenticate, category_controller.createCategory);
-    app.delete('/deletecat', adminAuthenticate, category_controller.deleteCategory);
+    app.get('/category/:id', category_controller.categoryById);
+    app.post('/addcat',  category_controller.createCategory);
+    app.delete('/deletecat/:id', adminAuthenticate, category_controller.deleteCategory);
+    app.put('/editcat/:id',adminAuthenticate, category_controller.updateCategory)
 
 }
 

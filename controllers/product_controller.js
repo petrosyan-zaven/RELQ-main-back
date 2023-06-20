@@ -83,18 +83,17 @@ function downloadCount(req, res) {
   })
 }
 
+async function deleteProduct(req, res) {
+  const { id } = req.params;
 
-
-function deleteProduct(req, res) {
-    const { id } = req.params;
-    Product.destroy({ where: { id } })
-      .then((prod) => {
-        res.json({ response: "deleted" });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+  try {
+    await Product.destroy({ where: { id } });
+    res.json({ response: "Product deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
+}
+
 
 module.exports = { allProducts, productByCategory, productById, deleteProduct, updateProduct, downloadCount, createProduct }
 
